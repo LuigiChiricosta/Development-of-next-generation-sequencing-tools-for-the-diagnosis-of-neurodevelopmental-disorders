@@ -37,7 +37,7 @@ outputAnnovarFileName="merg_out"
 reducedGnomADRelease="$desktop/Pipeline_Luigi_Chiricosta/GnomAD releases/reduced_gnomad_release.txt" #extra file
 #done
 
-if [ $(dpkg -l | grep -E '^ii' | grep realpath | wc -l) -eq 0 ]; then
+if [ $(dpkg -l | grep -E '^ii' | grep -w realpath | wc -l) -eq 0 ]; then
         echo "Realpath command is not in the system... installing..."
         sudo apt-get install realpath
 fi
@@ -54,7 +54,7 @@ else
 fi
 
 if [[ "$completePipeline" != "N" ]] || [[ "$pipelineNextStep" != "N" ]]; then
-	if [ $(dpkg -l | grep -E '^ii' | grep tabix | wc -l) -eq 0 ]; then
+	if [ $(dpkg -l | grep -E '^ii' | grep -w tabix | wc -l) -eq 0 ]; then
 		echo "Tabix command is not in the system... installing..."
 		sudo apt-get install tabix
 	fi
@@ -330,7 +330,12 @@ fi
 
 if [[ "$completePipeline" != "N" ]] || [[ "$pipelineNextStep" != "N" ]]; then
         echo "Attaching transcript information..."
-
+	
+	if [ $(dpkg -l | grep -E '^ii' | grep -w curl | wc -l) -eq 0 ]; then
+        	echo "Realpath command is not in the system... installing..."
+       		sudo apt-get install curl
+	fi
+	
 	tmp="$path/$project.plus.xls"; 
 	> $tmp;
  	
