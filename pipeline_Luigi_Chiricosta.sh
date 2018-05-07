@@ -332,7 +332,7 @@ if [[ "$completePipeline" != "N" ]] || [[ "$pipelineNextStep" != "N" ]]; then
         echo "Attaching transcript information..."
 	
 	if [ $(dpkg -l | grep -E '^ii' | grep -w curl | wc -l) -eq 0 ]; then
-        	echo "Realpath command is not in the system... installing..."
+        	echo "Curl command is not in the system... installing..."
        		sudo apt-get install curl
 	fi
 	
